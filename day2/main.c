@@ -48,8 +48,8 @@ int main(void)
 
         fclose(fp);
         
-        printf("%zu\n", nb_valid_passwords_silver);
-        printf("%zu\n", nb_valid_passwords_gold);
+        printf("Part one: %zu\n", nb_valid_passwords_silver);
+        printf("Part two: %zu\n", nb_valid_passwords_gold);
 
         return EXIT_SUCCESS;
 }

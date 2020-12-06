@@ -48,7 +48,7 @@ int main(void)
 	for (size_t i = 0; i < length; ++i) {
 		to_search = SUM - numbers[i];
 		if (p = bsearch(&to_search, numbers, length, sizeof(unsigned long), comp)) {
-			printf("Silver: %lu\n", numbers[i] * *p);
+			printf("Part two: %lu\n", numbers[i] * *p);
 			break;
 		}
 	}
@@ -58,7 +58,7 @@ int main(void)
 		for (size_t j = i; j < length; ++j) {
 			to_search = SUM - numbers[i] - numbers[j];
 			if (p = bsearch(&to_search, numbers, length, sizeof(unsigned), comp)) {
-				printf("Gold: %lu\n", numbers[i] * numbers[j] * *p);
+				printf("Part one: %lu\n", numbers[i] * numbers[j] * *p);
 				return EXIT_SUCCESS;
 			}
 		}
