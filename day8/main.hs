@@ -29,7 +29,7 @@ readProgram s = listArray bounds instructionList
 -- | Build the list of candidates for the correct program
 modifiedPrograms :: Array Int Instruction -> [Array Int Instruction]
 modifiedPrograms arr =
-  [ arr // [(i, flipInstruction (arr ! i))] | i <- (indices arr), isNotAcc (arr ! i)]
+  [ arr // [(i, flipInstruction (arr ! i))] | i <- indices arr, isNotAcc (arr ! i)]
   where flipInstruction x =
           case x of
             ACC n -> ACC n
@@ -53,11 +53,9 @@ step (State pc acc) arr =
 --       - wrappded in a Right if the program ends normally
 run :: Array Int Instruction -> Either Int Int
 run arr = go (State 0 0) Set.empty
-  where go state@(State pc acc) visitedPC =
-          if pc == snd (bounds arr) + 1
-          then Right acc  -- program finished!
-          else if programCounter nextState `Set.member` visitedPC
-               then Left acc  --loop entered!
-               else go nextState $ Set.insert pc visitedPC
+  where go state@(State pc acc) visitedPC
+          | pc == snd (bounds arr) + 1 = Right acc --program finished
+          | programCounter nextState `Set.member` visitedPC = Left acc --loop entered
+          | otherwise = go nextState $ Set.insert pc visitedPC
           where nextState = step state arr
                 nextPC = programCounter nextState

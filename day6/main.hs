@@ -7,4 +7,4 @@ main = do
   putStrLn $ "Part one: " ++
     show (sum $ map (length . nub . filter (/= '\n')) groupsOfAnswers)
   putStrLn $ "Part two: " ++
-    show (sum $ map (length . (foldr intersect ['a'..'z']) . lines) groupsOfAnswers)
+    show (sum $ map (length . foldr intersect ['a'..'z'] . lines) groupsOfAnswers)
